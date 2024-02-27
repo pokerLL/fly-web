@@ -1,0 +1,37 @@
+fly:
+  name: feature_usage
+  author: Lei
+  contact: llggg2323@163.com
+  version: 1.0.0 # major.minor.patch
+  description: A simple example to show how to use the feature of the configuration file
+  # port: 8080
+  # host: localhost
+  # debug: true
+  # log_level: debug
+  log:
+      all_log_file: logs/all.log
+      info_log_file: logs/info.log
+      error_log_file: logs/error.log
+  task:
+      cron:
+          - name: task1
+            schedule: "*/5 * * * *"
+            command: "echo hello"
+            enabled: true
+          - name: task2
+            schedule: "*/10 * * * *"
+            command: "echo world"
+            enabled: true
+  
+  
+mysql:
+  host: localhost
+  port: 3306
+  username: root
+  password: password
+
+redis:
+  host: localhost
+  port: 6379
+  password: password
+

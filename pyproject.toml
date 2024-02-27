@@ -1,0 +1,92 @@
+[tool.poetry]
+name = "fly-web"
+version = "0.1.2"
+description = "A simple asgi web framework"
+authors = ["wanglei <llggg2323@163.com>"]
+readme = "README.md"
+packages = [
+    { include = "fly", from = "src"},
+]
+
+[[tool.poetry.source]]
+name = "douban"
+url = "http://pypi.doubanio.com/simple/"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+loguru = "^0.7.2"
+pydantic = "^2.5.3"
+watchdog = "^3.0.0"
+pyinstrument = "^4.6.1"
+apispec = "^6.4.0"
+uvicorn = "^0.25.0"
+pytest-asyncio = "^0.23.4"
+pyjwt = "^2.8.0"
+
+[tool.poetry.group.dev.dependencies]
+yapf = "^0.40.2"
+pytest = "^7.4.4"
+isort = "^5.13.2"
+mypy = "^1.8.0"
+ruff = "^0.1.15"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+fly = "fly.cli:main"
+
+# ruff: Python 代码 Lint 工具
+# https://github.com/charliermarsh/ruff
+# 自定义配置项： https://beta.ruff.rs/docs/settings/
+[tool.ruff]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+line-length = 180
+select = ["A", "B", "C", "E", "F", "N", "S", "T", "W"] # IGNORE D, I, Q
+ignore = ["N801", "S101", "S104", "N802"]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401", "E402"]
+"migration/*.py" = ["A", "B", "C", "D", "E", "F", "I", "N", "Q", "S", "T", "W"]
+"test/*" = ["A", "B", "C", "D", "E", "F", "I", "N", "Q", "S", "T", "W"]
+
+# yapf: Python 代码格式化工具
+# https://github.com/google/yapf
+# 自定义配置项：https://github.com/google/yapf#knobs
+[tool.yapf]
+based_on_style = "pep8"
+indent_width = 4
+column_limit = 180
+blank_line_before_nested_class_or_def = true
+
+# isor: Python Import 优化工具
+# https://github.com/PyCQA/isort
+# 自定义配置项: https://pycqa.github.io/isort/docs/configuration/options.html
+[tool.isort]
+src_paths = "{{flask-app-name}}"
+virtual_env = 'venv' # 默认使用 venv 来查询第三方包
+line_length = 120
+sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER" # import 顺序
+no_lines_before = "LOCALFOLDER"
